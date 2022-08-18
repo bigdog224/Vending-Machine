@@ -1,6 +1,6 @@
 def main():
     
-    pick = input("What beverage would you like?\n\n   \033[4mDrink | Price\033[0m\n 1. Coke | $1.25\n 2. Sprite | $1.25\n 3. Gatorade | $2.00\n 4. Iced Tea | $1.50\n 5. Water | $1.00\n Choice: ")
+    pick = input("What beverage would you like?\n\n   \033[4mDrink     | Price\033[0m\n 1. Coke     | $1.25\n 2. Sprite   | $1.25\n 3. Gatorade | $2.00\n 4. Iced Tea | $1.50\n 5. Water    | $1.00\n Choice: ")
 
     # program runs if accepted input is given
     if pick == "1" or pick == "2" or pick == "3" or pick == "4" or pick == "5":
