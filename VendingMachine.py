@@ -5,8 +5,9 @@ def main():
     # program runs if accepted input is given
     if pick == "1" or pick == "2" or pick == "3" or pick == "4" or pick == "5":
         price = selection(pick)
-        print("Amount due: ", price)
+
         print("Insert cents in decimal value format (Ex: 25 cents --> 0.25). Insert dollars as an integer (1's and 5's accepted)")
+        print("Amount due: $" + price)
         payment(float(price))
 
     else:
@@ -42,22 +43,22 @@ def payment(due):
 
     # prompts user to continue inputting coins until drink is paid off
     while due > 0:
-        coin = float(input("Coin Inserted: "))
+        coin = float(input("Amount Inputted: $"))
 
-        # accepts US standardized values (5, 10 and 25 cents and $1 and $5)
+        # accepts US standardized values (1, 5, 10 and 25 cents and $1 and $5)
         if coin == .01 or coin == .05 or coin == .1 or coin == .25 or coin == 1.00 or coin == 5.00:
             due -= coin
             sum += coin
             if due > 0:
-                print("Amount Due:", round(due,2))
+                print("Amount Due: $" + str(round(due,2)))
 
         else:
-            print("Please input a valid coin amount. ")
+            print("Please input a valid payment amount. ")
          
     # returns total change to be given to user
     if due <= 0:
-        ch = abs(sum-ori)
-        print("Thank you! Enjoy your drink!\nChange: ", round(ch,2))
+        ch = round(abs(sum-ori),2)
+        print("Thank you! Enjoy your drink!\nChange: $" + str(ch))
 
 
 
