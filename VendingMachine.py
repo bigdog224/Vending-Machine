@@ -6,7 +6,7 @@ def main():
     if pick == "1" or pick == "2" or pick == "3" or pick == "4" or pick == "5":
         price = selection(pick)
         print("Amount due: ", price)
-        print("Insert 5, 10, or 25 cents in decimal value format (Ex: 25 cents --> 0.25)")
+        print("Insert cents in decimal value format (Ex: 25 cents --> 0.25). Insert dollars as an integer (1's and 5's accepted)")
         payment(float(price))
 
     else:
@@ -44,8 +44,8 @@ def payment(due):
     while due > 0:
         coin = float(input("Coin Inserted: "))
 
-        # only accepts 5, 10 or 25 cents
-        if coin == .05 or coin == .1 or coin == .25:
+        # accepts US standardized values (5, 10 and 25 cents and $1 and $5)
+        if coin == .01 or coin == .05 or coin == .1 or coin == .25 or coin == 1.00 or coin == 5.00:
             due -= coin
             sum += coin
             if due > 0:
