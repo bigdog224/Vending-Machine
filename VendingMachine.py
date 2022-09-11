@@ -4,7 +4,7 @@ vending_key = {"A1" : ("Coca-Cola", 2.25), "A2" : ("Sprite", 2.25), "A3" : ("Fan
                     "A10" : ("Water", 1.50)}
 
 def main():
-
+    c = 0 #counter to ensure valid input is given
 
     # prints drinks and code for drinks
     print(
@@ -24,20 +24,23 @@ Water        | A10
 
     '''
     )
-    pick = input("What beverage would you like? ").strip()
 
-    # program runs if accepted input is given
-    if pick in vending_key:
-        global drink
-        drink = vending_key[pick][0] #accessing values in dict, use brackets
-        price = vending_key[pick][1]
+    while(c == 0):
+        pick = input("What beverage would you like? ").strip()
 
-        print("Amount due: $", price)
-        payment(price)
+        # program runs if accepted input is given
+        if pick in vending_key:
+            global drink
+            drink = vending_key[pick][0] #accessing values in dict, use brackets
+            price = vending_key[pick][1]
+            c = 1
 
-    else:
-        print("That's not an option, please select a valid drink\n")
-        return main()
+            print("Amount due: ${}".format(price))
+            payment(price)
+
+        else:
+            print("That's not an option, please select a valid drink")
+        
 
 
 def payment(due):
@@ -46,23 +49,27 @@ def payment(due):
 
     # prompts user to continue inputting coins until drink is paid off
     while due > 0:
-        coin = float(input("Amount Inputted: $"))
+        try:
+            coin = float(input("Amount Inputted: $"))
 
-        # accepts US standardized values (1, 5, 10 and 25 cents and $1 and $5)
-        if coin == .01 or coin == .05 or coin == .1 or coin == .25 or coin == 1.00 or coin == 5.00 or coin == 10.00 or coin == 20.00:
-            due -= coin
-            sum += coin
+            if coin == .01 or coin == .05 or coin == .1 or coin == .25 or coin == 1.00 or coin == 5.00 or coin == 10.00 or coin == 20.00:
+                due -= coin
+                sum += coin
             if due > 0:
                 print("Amount Due: $" + str(round(due,2)))
 
-        else:
+        
+        except ValueError:
             print("Please input a valid payment amount. ")
          
     # returns total change to be given to user
-    if due <= 0:
+    if due < 0:
         ch = round(abs(sum-ori),2)
         print("Thank you! Enjoy your " + str(drink) +  "!")
         print("Change: $" + str(ch))
+    else:
+        ch = round(abs(sum-ori),2)
+        print("Thank you! Enjoy your " + str(drink) +  "!")
 
 
 main()
