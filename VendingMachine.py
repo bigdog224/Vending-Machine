@@ -1,40 +1,43 @@
+vending_key = {"A1" : ("Coca-Cola", 2.25), "A2" : ("Sprite", 2.25), "A3" : ("Fanta", 2.25), 
+                    "A4" : ("Powerade", 2.00), "A5" : ("Lemonade", 2.00), "A6" : ("Root Beer", 2.25), 
+                    "A7" : ("Apple Juice", 1.75), "A8" : ("Gatorade", 2.00), "A9" : ("Iced Tea", 1.75), 
+                    "A10" : ("Water", 1.50)}
+
 def main():
-    
-    pick = input("What beverage would you like?\n\n   \033[4mDrink     | Price\033[0m\n 1. Coke     | $1.25\n 2. Sprite   | $1.25\n 3. Gatorade | $2.00\n 4. Iced Tea | $1.50\n 5. Water    | $1.00\n Choice: ")
+
+
+    # prints drinks and code for drinks
+    print(
+    '''
+Welcome to my Virtual Vending Machine! Find the drink you'd like and input the code!\n
+\033[4mDrink        | Code\033[0m
+Coca-Cola    | A1
+Sprite       | A2
+Fanta        | A3
+Powerade     | A4
+Lemonade     | A5
+Root Beer    | A6
+Apple Juice  | A7
+Gatorade     | A8
+Iced Tea     | A9
+Water        | A10
+
+    '''
+    )
+    pick = input("What beverage would you like? ").strip()
 
     # program runs if accepted input is given
-    if pick == "1" or pick == "2" or pick == "3" or pick == "4" or pick == "5":
-        price = selection(pick)
+    if pick in vending_key:
+        global drink
+        drink = vending_key[pick][0] #accessing values in dict, use brackets
+        price = vending_key[pick][1]
 
-        print("Insert cents in decimal value format (Ex: 25 cents --> 0.25). Insert dollars as an integer (1's and 5's accepted)")
-        print("Amount due: $" + price)
-        payment(float(price))
+        print("Amount due: $", price)
+        payment(price)
 
     else:
-        print("That's not an option, please select a valid input\n")
+        print("That's not an option, please select a valid drink\n")
         return main()
-        
-
-# Returns appropiate drink and drink price given user input
-def selection(x):
-    if x == "1":
-        print("\nDrink: Coke")
-        return "1.25"
-    elif x == "2":
-        print("\nDrink: Sprite")
-        return "1.25"
-    elif x == "3":
-        print("\nDrink: Gatorade")
-        return "2.00"
-    elif x == "4":
-        print("\nDrink: Iced Tea")
-        return "1.50"
-    elif x == "5":
-        print("\nDrink: Water")
-        return "1.00"
-
-
-
 
 
 def payment(due):
@@ -46,7 +49,7 @@ def payment(due):
         coin = float(input("Amount Inputted: $"))
 
         # accepts US standardized values (1, 5, 10 and 25 cents and $1 and $5)
-        if coin == .01 or coin == .05 or coin == .1 or coin == .25 or coin == 1.00 or coin == 5.00:
+        if coin == .01 or coin == .05 or coin == .1 or coin == .25 or coin == 1.00 or coin == 5.00 or coin == 10.00 or coin == 20.00:
             due -= coin
             sum += coin
             if due > 0:
@@ -58,9 +61,8 @@ def payment(due):
     # returns total change to be given to user
     if due <= 0:
         ch = round(abs(sum-ori),2)
-        print("Thank you! Enjoy your drink!\nChange: $" + str(ch))
-
-
+        print("Thank you! Enjoy your " + str(drink) +  "!")
+        print("Change: $" + str(ch))
 
 
 main()
